@@ -1,0 +1,20 @@
+{
+  "name": "Micro-Memoir",
+  "short_name": "Memoir",
+  "description": "The ordinary, made luminous — one day at a time.",
+  "start_url": "./micro-memoir.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#130e07",
+  "theme_color": "#130e07",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%23130e07'/%3E%3Crect x='0' y='0' width='16' height='512' rx='4' fill='%237c1f1f' opacity='.8'/%3E%3Ctext x='270' y='335' font-family='Georgia%2C serif' font-size='280' font-style='italic' font-weight='700' fill='%23f8f1e3' text-anchor='middle'%3EM%3C/text%3E%3Ctext x='270' y='430' font-family='Georgia%2C serif' font-size='48' fill='%23c89a14' text-anchor='middle' letter-spacing='10'%3EMEMOIR%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "productivity"],
+  "lang": "en"
+}
