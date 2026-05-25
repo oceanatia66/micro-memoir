@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Micro-Memoir</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23130e07'/%3E%3Crect x='0' y='0' width='6' height='64' rx='3' fill='%237c1f1f' opacity='.9'/%3E%3Ctext x='36' y='48' font-family='Georgia%2C serif' font-size='42' font-style='italic' font-weight='700' fill='%23f8f1e3' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
-<!-- PWA -->
 <meta name="application-name" content="Micro-Memoir">
 <meta name="description" content="The ordinary, made luminous — one day at a time.">
 <meta name="theme-color" content="#130e07">
@@ -14,672 +13,222 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Micro-Memoir">
 <link rel="manifest" href="manifest.json">
-
-<!-- Apple touch icon (inline SVG as data URL) -->
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23130e07'/%3E%3Crect x='0' y='0' width='18' height='512' fill='%237c1f1f' opacity='.75'/%3E%3Ctext x='256' y='320' font-family='Georgia%2C serif' font-size='260' font-style='italic' font-weight='700' fill='%23f8f1e3' text-anchor='middle'%3EM%3C/text%3E%3Ctext x='256' y='420' font-family='Georgia%2C serif' font-size='52' fill='%23c89a14' text-anchor='middle' letter-spacing='8'%3EMEMOIR%3C/text%3E%3C/svg%3E">
-
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23130e07'/%3E%3Crect x='0' y='0' width='18' height='512' fill='%237c1f1f' opacity='.75'/%3E%3Ctext x='256' y='320' font-family='Georgia%2C serif' font-size='260' font-style='italic' font-weight='700' fill='%23f8f1e3' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --paper:       #f8f1e3;
-  --paper-mid:   #ede3cc;
-  --paper-dark:  #ddd0b4;
-  --paper-deep:  #c9b898;
-  --ink:         #1c1408;
-  --ink-mid:     #473719;
-  --ink-light:   #78603e;
-  --ink-ghost:   #a8906a;
-  --crimson:     #7c1f1f;
-  --gold:        #9a7010;
-  --gold-hi:     #c89a14;
-  --bg:          #130e07;
-}
+:root{--paper:#f8f1e3;--paper-mid:#ede3cc;--paper-dark:#ddd0b4;--paper-deep:#c9b898;--ink:#1c1408;--ink-mid:#473719;--ink-light:#78603e;--ink-ghost:#a8906a;--crimson:#7c1f1f;--gold:#9a7010;--gold-hi:#c89a14;--bg:#130e07;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{min-height:100vh;background:var(--bg);background-image:radial-gradient(ellipse 100% 60% at 50% 0%,#3d2510 0%,transparent 55%),radial-gradient(ellipse 60% 80% at 10% 100%,#2a1a08 0%,transparent 50%),radial-gradient(ellipse 50% 60% at 90% 60%,#221508 0%,transparent 50%),radial-gradient(ellipse 30% 30% at 50% 45%,#1e1408 0%,transparent 60%);font-family:'Lora',Georgia,serif;color:var(--ink);display:flex;flex-direction:column;align-items:center;padding:60px 20px 110px;position:relative;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");opacity:.5;}
+body>*{position:relative;z-index:1;}
+.masthead{text-align:center;margin-bottom:48px;animation:fadeDown 1s cubic-bezier(0.16,1,0.3,1) both;}
+.masthead-issue{font-family:'IM Fell English SC',serif;font-size:13px;letter-spacing:.35em;color:rgba(200,154,20,0.45);margin-bottom:16px;}
+h1{font-family:'Playfair Display','IM Fell English SC',serif;font-size:clamp(58px,12vw,108px);font-weight:700;font-style:italic;color:var(--paper);letter-spacing:-0.01em;line-height:0.92;text-shadow:0 1px 0 rgba(255,255,255,0.04),0 4px 16px rgba(0,0,0,0.7),0 16px 48px rgba(0,0,0,0.4);}
+.masthead-rule{display:flex;align-items:center;justify-content:center;gap:0;margin:18px auto 16px;width:min(380px,80vw);}
+.rule-side{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(200,154,20,0.35));}
+.rule-side.r{background:linear-gradient(to left,transparent,rgba(200,154,20,0.35));}
+.rule-center{width:5px;height:5px;background:rgba(200,154,20,0.55);transform:rotate(45deg);margin:0 12px;}
+.tagline{font-family:'Lora',Georgia,serif;font-style:italic;font-size:clamp(17px,2.2vw,21px);color:rgba(168,144,106,0.75);letter-spacing:.03em;margin-top:2px;}
 
-* { margin:0; padding:0; box-sizing:border-box; }
+/* Stats */
+.masthead-stats{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:20px;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--paper);line-height:1;}
+.stat-label{font-family:'IM Fell English SC',serif;font-size:9px;letter-spacing:.18em;color:rgba(200,175,140,0.7);margin-top:2px;}
+.stat-div{width:1px;height:28px;background:rgba(200,154,20,0.2);}
+.streak-flame{font-size:16px;}
+.streak-alive{color:#c89a14;}
+.streak-dead{opacity:.3;filter:grayscale(1);}
 
-/* ─── Background ─── */
-body {
-  min-height: 100vh;
-  background: var(--bg);
-  /* Warm vignette + candle-light glow */
-  background-image:
-    radial-gradient(ellipse 100% 60% at 50% 0%,   #3d2510 0%, transparent 55%),
-    radial-gradient(ellipse 60%  80% at 10% 100%,  #2a1a08 0%, transparent 50%),
-    radial-gradient(ellipse 50%  60% at 90% 60%,   #221508 0%, transparent 50%),
-    radial-gradient(ellipse 30%  30% at 50% 45%,   #1e1408 0%, transparent 60%);
-  font-family: 'Lora', Georgia, serif;
-  color: var(--ink);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 60px 20px 110px;
-  position: relative;
-  overflow-x: hidden;
-}
+/* Search */
+.search-wrap{width:100%;max-width:750px;margin-bottom:16px;position:relative;display:none;}
+.search-wrap.visible{display:block;animation:fadeIn .3s ease both;}
+.search-input{width:100%;padding:12px 16px 12px 42px;background:rgba(248,241,227,0.06);border:1px solid rgba(248,241,227,0.1);border-radius:3px;color:var(--paper);font-family:'Lora',Georgia,serif;font-style:italic;font-size:15px;outline:none;transition:all .2s;caret-color:var(--gold-hi);}
+.search-input::placeholder{color:rgba(248,241,227,0.25);}
+.search-input:focus{background:rgba(248,241,227,0.09);border-color:rgba(248,241,227,0.2);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.35;pointer-events:none;}
 
-/* Subtle noise overlay on the body */
-body::before {
-  content:'';
-  position:fixed; inset:0; pointer-events:none; z-index:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  opacity:.5;
-}
+/* Card */
+.card{width:100%;max-width:750px;position:relative;animation:riseUp 1s .1s cubic-bezier(0.16,1,0.3,1) both;}
+.card-leaf{position:absolute;inset:0;background:#ede3cc;border-radius:3px;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
+.card-leaf:nth-child(1){transform:rotate(1.2deg) translate(5px,8px);opacity:.55;background:#e9ddc6;}
+.card-leaf:nth-child(2){transform:rotate(-0.7deg) translate(-4px,5px);opacity:.38;background:#e3d7bf;}
+.card-face{position:relative;background:var(--paper);border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgba(160,130,90,0.2),0 2px 6px rgba(0,0,0,0.12),0 12px 28px rgba(0,0,0,0.22),0 32px 72px rgba(0,0,0,0.22),0 64px 100px rgba(0,0,0,0.12);}
+.card-face::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");}
+.card-spine{position:absolute;top:0;bottom:0;left:0;width:5px;background:linear-gradient(to bottom,var(--crimson) 0%,#a33030 50%,var(--crimson) 100%);opacity:.75;z-index:2;}
+.card-margin{position:absolute;left:60px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 30px,rgba(175,80,80,0.16) 60px,rgba(175,80,80,0.16) calc(100% - 60px),transparent calc(100% - 30px));pointer-events:none;z-index:1;}
+.card-inner{position:relative;z-index:3;padding:52px 60px 56px 84px;}
+.section-label{font-family:'IM Fell English SC',serif;font-size:14px;letter-spacing:.28em;color:var(--ink-mid);margin-bottom:14px;display:flex;align-items:center;gap:14px;}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--paper-dark),transparent 80%);}
+.divider{border:none;height:0;margin:34px 0;border-top:1px solid var(--paper-dark);position:relative;}
+.divider::after{content:'· · ·';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 12px;font-size:13px;color:var(--paper-deep);letter-spacing:.4em;}
 
-body > * { position:relative; z-index:1; }
+/* Textarea */
+.textarea-wrap{position:relative;}
+textarea{width:100%;min-height:148px;background:rgba(255,255,255,0.5);border:1px solid var(--paper-dark);border-bottom:2px solid var(--paper-deep);border-radius:1px;padding:18px 18px 40px;font-family:'Lora',Georgia,serif;font-size:17px;color:var(--ink);line-height:1.82;resize:vertical;outline:none;transition:all .25s;caret-color:var(--crimson);box-shadow:inset 0 1px 4px rgba(0,0,0,0.04);}
+textarea::placeholder{color:var(--ink-ghost);font-style:italic;}
+textarea:focus{background:rgba(255,255,255,0.72);border-color:var(--ink-light);border-bottom-color:var(--ink-mid);box-shadow:inset 0 1px 4px rgba(0,0,0,0.04),0 0 0 3px rgba(122,96,64,0.09);}
+.word-count{position:absolute;bottom:11px;right:14px;font-family:'IM Fell English',serif;font-style:italic;font-size:13px;color:var(--ink-ghost);pointer-events:none;transition:color .3s;}
+.word-count.ready{color:var(--gold-hi);}
+.hint-text{font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:var(--ink-ghost);margin-top:8px;opacity:0;transition:opacity .5s;}
+.hint-text.visible{opacity:1;}
 
-/* ─── Masthead ─── */
-.masthead {
-  text-align: center;
-  margin-bottom: 56px;
-  animation: fadeDown 1s cubic-bezier(0.16,1,0.3,1) both;
-}
+/* Style buttons */
+.style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.style-btn{padding:14px 10px 12px;background:rgba(255,255,255,0.32);border:1px solid var(--paper-dark);border-radius:2px;font-family:'IM Fell English',serif;font-size:15.5px;color:var(--ink);cursor:pointer;transition:all .2s;text-align:center;line-height:1.2;box-shadow:0 1px 3px rgba(0,0,0,0.04),inset 0 1px 0 rgba(255,255,255,0.7);position:relative;overflow:hidden;}
+.style-btn::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(200,154,20,0.12) 0%,transparent 70%);opacity:0;transition:opacity .2s;}
+.style-btn:hover{background:rgba(255,255,255,0.72);border-color:var(--ink-light);color:var(--ink);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.9);}
+.style-btn:hover::after{opacity:1;}
+.style-btn.active{background:linear-gradient(160deg,#2e2010 0%,var(--ink) 100%);border-color:rgba(200,154,20,0.25);color:var(--paper-mid);box-shadow:0 3px 14px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.06);transform:translateY(-1px);}
+.style-btn.active::after{opacity:0;}
+.author-dates{display:block;font-size:13px;opacity:.65;font-style:italic;margin-top:3px;}
+.style-btn[data-style="Surprise me"]{border-style:dashed;border-color:var(--paper-deep);color:var(--ink-mid);background:rgba(255,255,255,0.18);}
+.style-btn[data-style="Surprise me"].active{border-style:solid;background:linear-gradient(160deg,#2a1c0e 0%,#1e1408 100%);border-color:rgba(200,154,20,0.3);}
 
-/* Issue-style date line above title */
-.masthead-issue {
-  font-family: 'IM Fell English SC', serif;
-  font-size: 13px;
-  letter-spacing: 0.35em;
-  color: rgba(200,154,20,0.45);
-  margin-bottom: 18px;
-}
+/* Generate */
+.generate-btn{width:100%;padding:18px 20px;background:linear-gradient(165deg,#2c1e0e 0%,#1a1208 100%);color:var(--paper);border:1px solid rgba(200,154,20,0.22);border-radius:2px;font-family:'IM Fell English SC',serif;font-size:17px;letter-spacing:.2em;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,0.22),0 8px 28px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.06),inset 0 -1px 0 rgba(0,0,0,0.3);position:relative;overflow:hidden;}
+.generate-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.05) 0%,transparent 50%);pointer-events:none;}
+.generate-btn:hover:not(:disabled){background:linear-gradient(165deg,#3c2c18 0%,#2a1e10 100%);border-color:rgba(200,154,20,0.45);transform:translateY(-2px);color:var(--paper);box-shadow:0 4px 14px rgba(0,0,0,0.28),0 16px 40px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.08);}
+.generate-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+.btn-spark{color:var(--gold-hi);font-size:14px;opacity:.9;}
+.shortcut-hint{font-size:13px;opacity:.38;font-style:italic;letter-spacing:.05em;}
 
-/* The big title */
-h1 {
-  font-family: 'Playfair Display', 'IM Fell English SC', serif;
-  font-size: clamp(58px, 12vw, 108px);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--paper);
-  letter-spacing: -0.01em;
-  line-height: 0.92;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.04),
-    0 4px 16px rgba(0,0,0,0.7),
-    0 16px 48px rgba(0,0,0,0.4);
-}
+/* Loading */
+.loading-state{display:none;text-align:center;padding:72px 20px;}
+.quill-halo{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,20,0.1) 0%,rgba(200,154,20,0.03) 60%,transparent 100%);margin-bottom:22px;box-shadow:0 0 0 1px rgba(200,154,20,0.08);animation:haloBreath 2.4s ease-in-out infinite;}
+@keyframes haloBreath{0%,100%{box-shadow:0 0 0 1px rgba(200,154,20,0.08),0 0 20px rgba(200,154,20,0.04);}50%{box-shadow:0 0 0 1px rgba(200,154,20,0.18),0 0 36px rgba(200,154,20,0.1);}}
+.quill-icon{font-size:32px;animation:quillSwing 1.5s ease-in-out infinite;display:inline-block;}
+@keyframes quillSwing{0%,100%{transform:rotate(-9deg) translate(-2px,1px);}50%{transform:rotate(7deg) translate(2px,-1px);}}
+.loading-text{font-family:'IM Fell English',serif;font-style:italic;color:var(--ink-ghost);font-size:17px;letter-spacing:.06em;transition:opacity .25s;}
 
-/* Ornamental rule under title */
-.masthead-rule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  margin: 18px auto 16px;
-  width: min(380px, 80vw);
-}
-.rule-side {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(200,154,20,0.35));
-}
-.rule-side.r { background: linear-gradient(to left, transparent, rgba(200,154,20,0.35)); }
-.rule-center {
-  width: 5px; height: 5px;
-  background: rgba(200,154,20,0.55);
-  transform: rotate(45deg);
-  margin: 0 12px;
-}
+/* Surprise */
+.surprise-reveal{display:none;text-align:center;padding:80px 24px 72px;}
+.surprise-reveal.show{display:block;animation:fadeIn .4s ease both;}
+.reveal-eyebrow{font-family:'IM Fell English SC',serif;font-size:16px;letter-spacing:.38em;color:var(--ink-ghost);margin-bottom:24px;}
+.reveal-author{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(34px,8vw,50px);color:var(--ink);line-height:1;animation:revealPop .6s .1s cubic-bezier(0.34,1.56,0.64,1) both;}
+@keyframes revealPop{from{opacity:0;transform:scale(0.5) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.reveal-ornament{font-size:22px;color:var(--gold-hi);display:block;margin:18px 0 22px;opacity:.8;animation:revealPop .5s .28s cubic-bezier(0.34,1.56,0.64,1) both;}
+.reveal-continue{padding:13px 44px;background:linear-gradient(165deg,#2c1e0e,#1a1208);color:var(--paper-mid);border:1px solid rgba(200,154,20,0.25);border-radius:2px;font-family:'IM Fell English SC',serif;font-size:15px;letter-spacing:.18em;cursor:pointer;transition:all .18s;animation:fadeIn .4s .58s ease both;animation-fill-mode:both;opacity:0;}
+.reveal-continue:hover{background:linear-gradient(165deg,#3c2c18,#2a1e10);border-color:rgba(200,154,20,.45);color:var(--paper);}
 
-.tagline {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(17px, 2.2vw, 21px);
-  color: rgba(168,144,106,0.75);
-  letter-spacing: 0.03em;
-  margin-top: 2px;
-}
+/* Output */
+.memoir-output{display:none;animation:fadeIn .7s ease both;}
+.memoir-header{text-align:center;margin-bottom:36px;}
+.header-rule-top{display:flex;align-items:center;margin-bottom:20px;}
+.hrt-thick{flex:1;height:2px;background:var(--ink);}
+.hrt-thin{flex:2;height:1px;background:var(--paper-deep);margin:0 3px;}
+.hrt-dot{width:5px;height:5px;border-radius:50%;background:var(--ink);margin:0 6px;flex-shrink:0;}
+.title-edit-hint{font-family:'IM Fell English',serif;font-style:italic;font-size:11px;color:var(--ink-ghost);opacity:0;transition:opacity .3s;margin-bottom:4px;}
+.memoir-header:hover .title-edit-hint{opacity:.6;}
+.memoir-title{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(26px,4vw,34px);color:var(--ink);line-height:1.2;margin-bottom:12px;border:none;background:transparent;width:100%;text-align:center;outline:none;cursor:text;padding:4px 8px;border-radius:2px;transition:background .2s;}
+.memoir-title:hover{background:rgba(0,0,0,0.03);}
+.memoir-title:focus{background:rgba(0,0,0,0.05);box-shadow:0 0 0 2px rgba(122,96,64,0.15);}
+.memoir-byline{font-family:'IM Fell English SC',serif;font-size:14px;letter-spacing:.3em;color:var(--ink-ghost);margin-bottom:6px;}
+.memoir-meta{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:var(--ink-light);}
+.header-rule-bottom{display:flex;align-items:center;margin-top:24px;gap:0;}
+.hrb-line{flex:1;height:1px;background:var(--paper-dark);}
+.hrb-ornament{padding:0 16px;color:var(--gold);font-size:17px;line-height:1;}
+.memoir-text{font-family:'Lora',Georgia,serif;font-size:19px;line-height:2.05;color:var(--ink);text-align:justify;hyphens:auto;}
+.memoir-text p+p{text-indent:2em;margin-top:.2em;}
+.memoir-text p:first-child::first-letter{font-family:'Playfair Display',serif;font-weight:700;float:left;font-size:5.6em;line-height:.68;margin-right:8px;margin-top:12px;color:var(--crimson);text-shadow:1px 2px 0 rgba(100,20,20,0.12);}
+.memoir-footer{display:flex;align-items:center;justify-content:space-between;margin-top:44px;padding-top:16px;border-top:1px solid var(--paper-dark);font-family:'IM Fell English',serif;font-style:italic;font-size:16px;color:var(--ink-ghost);}
+.page-num{font-style:normal;font-family:'IM Fell English SC',serif;font-size:15px;letter-spacing:.12em;}
+.source-notes{margin-top:26px;padding:14px 18px;background:linear-gradient(to right,rgba(0,0,0,0.03),transparent);border-left:2px solid var(--paper-deep);border-radius:0 2px 2px 0;}
+.source-notes-label{font-family:'IM Fell English SC',serif;font-size:16px;letter-spacing:.24em;color:var(--ink-ghost);margin-bottom:6px;}
+.source-notes-text{font-size:15px;color:var(--ink-light);font-style:italic;line-height:1.65;opacity:.8;}
 
-/* ─── Card stack (stacked pages effect) ─── */
-.card {
-  width: 100%;
-  max-width: 750px;
-  position: relative;
-  animation: riseUp 1s 0.1s cubic-bezier(0.16,1,0.3,1) both;
-}
+/* Action buttons */
+.action-row{display:flex;gap:8px;margin-top:34px;padding-top:28px;border-top:1px solid var(--paper-dark);}
+.action-btn{flex:1;padding:11px 8px;background:rgba(255,255,255,0.38);border:1px solid var(--paper-dark);border-radius:2px;font-family:'IM Fell English',serif;font-size:14px;color:var(--ink-mid);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:5px;box-shadow:0 1px 3px rgba(0,0,0,0.05),inset 0 1px 0 rgba(255,255,255,0.75);}
+.action-btn:hover{background:rgba(255,255,255,0.78);border-color:var(--ink-light);color:var(--ink);transform:translateY(-1px);}
+.action-btn.success{border-color:#5a8a5a!important;color:#4a7a4a!important;background:rgba(90,138,90,0.07)!important;}
+.action-btn.saved{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(154,112,16,0.07)!important;}
+.action-btn.reading{border-color:var(--crimson)!important;color:var(--crimson)!important;background:rgba(124,31,31,0.07)!important;}
+.bottom-actions{display:flex;gap:10px;margin-top:10px;}
+.secondary-btn{flex:1;padding:11px;background:transparent;border:1px dashed var(--paper-deep);border-radius:2px;font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:var(--ink-ghost);cursor:pointer;transition:all .18s;text-align:center;}
+.secondary-btn:hover{border-style:solid;border-color:var(--ink-light);color:var(--ink-mid);background:rgba(255,255,255,.2);}
+.error-msg{background:rgba(122,31,31,0.06);border:1px solid rgba(122,31,31,0.22);border-left:3px solid var(--crimson);padding:13px 16px;font-size:16px;color:var(--crimson);margin-top:14px;display:none;font-style:italic;border-radius:0 1px 1px 0;}
 
-/* Pages behind */
-.card-leaf {
-  position: absolute; inset: 0;
-  background: #ede3cc;
-  border-radius: 3px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-}
-.card-leaf:nth-child(1) { transform: rotate(1.2deg) translate(5px, 8px); opacity:.55; background:#e9ddc6; }
-.card-leaf:nth-child(2) { transform: rotate(-0.7deg) translate(-4px, 5px); opacity:.38; background:#e3d7bf; }
+/* Collection */
+.collection-section{width:100%;max-width:750px;margin-top:56px;animation:fadeUp .9s .25s cubic-bezier(0.16,1,0.3,1) both;}
+.collection-header{font-family:'IM Fell English SC',serif;font-size:15px;letter-spacing:.24em;color:rgba(200,175,140,0.85);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.collection-header-text{display:flex;align-items:center;gap:14px;flex:1;}
+.collection-header-text::before,.collection-header-text::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(200,175,140,0.14));}
+.collection-header-text::after{background:linear-gradient(to left,transparent,rgba(200,175,140,0.14));}
+.search-toggle{background:none;border:none;color:rgba(200,175,140,0.7);cursor:pointer;font-size:17px;padding:4px 6px;transition:color .15s;border-radius:2px;line-height:1;}
+.search-toggle:hover,.search-toggle.active{color:rgba(200,175,140,1);}
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.collection-item{background:linear-gradient(150deg,rgba(248,241,227,0.06) 0%,rgba(248,241,227,0.03) 100%);border:1px solid rgba(248,241,227,0.09);border-radius:3px;padding:20px 18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.collection-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--crimson),transparent 70%);opacity:0;transition:opacity .2s;}
+.collection-item:hover{background:linear-gradient(150deg,rgba(248,241,227,0.1) 0%,rgba(248,241,227,0.06) 100%);border-color:rgba(248,241,227,0.18);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.22);}
+.collection-item:hover::before{opacity:.7;}
+.ci-style{font-family:'IM Fell English SC',serif;font-size:10px;letter-spacing:.2em;color:var(--gold-hi);margin-bottom:6px;opacity:1;}
+.ci-title{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:rgba(248,241,227,0.95);margin-bottom:8px;line-height:1.3;}
+.ci-raw{font-size:12px;color:rgba(248,241,227,0.55);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:italic;margin-bottom:10px;}
+.ci-date{font-family:'IM Fell English SC',serif;font-size:10px;letter-spacing:.1em;color:rgba(248,241,227,0.45);}
+.ci-delete{position:absolute;top:10px;right:10px;background:none;border:none;color:rgba(248,241,227,0.12);cursor:pointer;font-size:15px;line-height:1;padding:3px 5px;transition:all .15s;border-radius:2px;}
+.ci-delete:hover{color:#cc5555;background:rgba(180,50,50,0.12);}
+.empty-collection{font-family:'IM Fell English',serif;font-style:italic;font-size:16px;color:rgba(248,241,227,0.55);text-align:center;padding:48px 32px;border:1px dashed rgba(248,241,227,0.15);border-radius:3px;line-height:1.8;}
+.no-results{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:rgba(248,241,227,0.5);text-align:center;padding:32px;}
 
-/* Main face */
-.card-face {
-  position: relative;
-  background: var(--paper);
-  border-radius: 2px;
-  overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(160,130,90,0.2),
-    0 2px 6px rgba(0,0,0,0.12),
-    0 12px 28px rgba(0,0,0,0.22),
-    0 32px 72px rgba(0,0,0,0.22),
-    0 64px 100px rgba(0,0,0,0.12);
-}
+/* Toast */
+.toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,#2e2010,#1a1208);color:var(--paper-mid);padding:13px 30px;border-radius:2px;border:1px solid rgba(200,154,20,0.22);font-family:'IM Fell English',serif;font-style:italic;font-size:16px;transition:transform .36s cubic-bezier(0.16,1,0.3,1);z-index:100;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.toast.show{transform:translateX(-50%) translateY(0);}
 
-/* Paper grain */
-.card-face::before {
-  content:'';
-  position:absolute; inset:0; pointer-events:none; z-index:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
-}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes riseUp{from{opacity:0;transform:translateY(28px) scale(.99);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-/* Red spine accent stripe */
-.card-spine {
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 5px;
-  background: linear-gradient(to bottom, var(--crimson) 0%, #a33030 50%, var(--crimson) 100%);
-  opacity: .75;
-  z-index: 2;
-}
+/* Install banner */
+.install-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:linear-gradient(to right,#1e1408,#2a1e10);border-top:1px solid rgba(200,154,20,0.25);padding:16px 20px;padding-bottom:calc(16px + env(safe-area-inset-bottom));align-items:center;gap:14px;z-index:200;box-shadow:0 -4px 24px rgba(0,0,0,0.4);}
+.install-icon{font-size:28px;flex-shrink:0;}
+.install-text{flex:1;}
+.install-text strong{display:block;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--paper);margin-bottom:2px;}
+.install-text span{font-family:'IM Fell English',serif;font-style:italic;font-size:12px;color:var(--ink-ghost);}
+.install-btn{padding:10px 20px;background:linear-gradient(165deg,#3c2c18,#2a1e10);border:1px solid rgba(200,154,20,0.35);border-radius:2px;font-family:'IM Fell English SC',serif;font-size:12px;letter-spacing:.15em;color:var(--paper-mid);cursor:pointer;transition:all .18s;white-space:nowrap;}
+.install-dismiss{background:none;border:none;color:var(--ink-ghost);font-size:20px;cursor:pointer;padding:4px;line-height:1;opacity:.6;transition:opacity .15s;flex-shrink:0;}
 
-/* Margin rule */
-.card-margin {
-  position: absolute;
-  left: 60px; top: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    transparent 30px,
-    rgba(175,80,80,0.16) 60px,
-    rgba(175,80,80,0.16) calc(100% - 60px),
-    transparent calc(100% - 30px));
-  pointer-events: none;
-  z-index: 1;
-}
-
-.card-inner {
-  position: relative;
-  z-index: 3;
-  padding: 52px 60px 56px 84px;
-}
-
-/* ─── Section labels ─── */
-.section-label {
-  font-family: 'IM Fell English SC', serif;
-  font-size: 14px;
-  letter-spacing: 0.28em;
-  color: var(--ink-ghost);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.section-label::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: linear-gradient(to right, var(--paper-dark), transparent 80%);
-}
-
-.divider {
-  border: none; height: 0; margin: 34px 0;
-  border-top: 1px solid var(--paper-dark);
-  position: relative;
-}
-.divider::after {
-  content: '· · ·';
-  position: absolute;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--paper);
-  padding: 0 12px;
-  font-size: 13px;
-  color: var(--paper-deep);
-  letter-spacing: 0.4em;
-}
-
-/* ─── Textarea ─── */
-.textarea-wrap { position: relative; }
-
-textarea {
-  width: 100%;
-  min-height: 148px;
-  background: rgba(255,255,255,0.5);
-  border: 1px solid var(--paper-dark);
-  border-bottom: 2px solid var(--paper-deep);
-  border-radius: 1px;
-  padding: 18px 18px 40px;
-  font-family: 'Lora', Georgia, serif;
-  font-size: 17px;
-  color: var(--ink);
-  line-height: 1.82;
-  resize: vertical;
-  outline: none;
-  transition: all .25s;
-  caret-color: var(--crimson);
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.04);
-}
-textarea::placeholder { color: var(--ink-ghost); font-style: italic; }
-textarea:focus {
-  background: rgba(255,255,255,0.72);
-  border-color: var(--ink-light);
-  border-bottom-color: var(--ink-mid);
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.04), 0 0 0 3px rgba(122,96,64,0.09);
-}
-
-.word-count {
-  position: absolute; bottom: 11px; right: 14px;
-  font-family: 'IM Fell English', serif; font-style: italic;
-  font-size: 13px; color: var(--ink-ghost);
-  pointer-events: none; transition: color .3s;
-}
-.word-count.ready { color: var(--gold-hi); }
-
-.hint-text {
-  font-family: 'IM Fell English', serif; font-style: italic;
-  font-size: 14px; color: var(--ink-ghost);
-  margin-top: 8px; opacity: 0; transition: opacity .5s;
-}
-.hint-text.visible { opacity: 1; }
-
-/* ─── Style buttons ─── */
-.style-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
-}
-
-.style-btn {
-  padding: 14px 10px 12px;
-  background: rgba(255,255,255,0.32);
-  border: 1px solid var(--paper-dark);
-  border-radius: 2px;
-  font-family: 'IM Fell English', serif;
-  font-size: 15.5px;
-  color: var(--ink-mid);
-  cursor: pointer;
-  transition: all .2s;
-  text-align: center;
-  line-height: 1.2;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.7);
-  position: relative;
-  overflow: hidden;
-}
-/* Subtle warm glow on hover */
-.style-btn::after {
-  content:'';
-  position:absolute; inset:0;
-  background: radial-gradient(ellipse at 50% 120%, rgba(200,154,20,0.12) 0%, transparent 70%);
-  opacity:0; transition: opacity .2s;
-}
-.style-btn:hover { background: rgba(255,255,255,0.72); border-color: var(--ink-light); color: var(--ink); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.9); }
-.style-btn:hover::after { opacity:1; }
-.style-btn.active {
-  background: linear-gradient(160deg, #2e2010 0%, var(--ink) 100%);
-  border-color: rgba(200,154,20,0.25);
-  color: var(--paper-mid);
-  box-shadow: 0 3px 14px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06);
-  transform: translateY(-1px);
-}
-.style-btn.active::after { opacity: 0; }
-.author-dates {
-  display: block; font-size: 13px; opacity: .5;
-  font-style: italic; margin-top: 3px;
-}
-
-/* Surprise button special styling */
-.style-btn[data-style="Surprise me"] {
-  border-style: dashed;
-  border-color: var(--paper-deep);
-  color: var(--ink-light);
-  background: rgba(255,255,255,0.18);
-}
-.style-btn[data-style="Surprise me"].active {
-  border-style: solid;
-  background: linear-gradient(160deg, #2a1c0e 0%, #1e1408 100%);
-  border-color: rgba(200,154,20,0.3);
-}
-
-/* ─── Generate button ─── */
-.generate-btn {
-  width: 100%;
-  padding: 18px 20px;
-  background: linear-gradient(165deg, #2c1e0e 0%, #1a1208 100%);
-  color: var(--paper-mid);
-  border: 1px solid rgba(200,154,20,0.22);
-  border-radius: 2px;
-  font-family: 'IM Fell English SC', serif;
-  font-size: 17px;
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  transition: all .22s;
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.22),
-    0 8px 28px rgba(0,0,0,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    inset 0 -1px 0 rgba(0,0,0,0.3);
-  position: relative; overflow: hidden;
-}
-.generate-btn::before {
-  content:'';
-  position:absolute; inset:0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 50%);
-  pointer-events:none;
-}
-.generate-btn:hover:not(:disabled) {
-  background: linear-gradient(165deg, #3c2c18 0%, #2a1e10 100%);
-  border-color: rgba(200,154,20,0.45);
-  transform: translateY(-2px);
-  color: var(--paper);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.28), 0 16px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
-}
-.generate-btn:disabled { opacity:.35; cursor:not-allowed; transform:none; }
-.btn-spark { color: var(--gold-hi); font-size: 14px; opacity:.9; }
-.shortcut-hint { font-size: 13px; opacity:.38; font-style:italic; letter-spacing:.05em; }
-
-/* ─── Loading ─── */
-.loading-state { display:none; text-align:center; padding: 72px 20px; }
-.quill-halo {
-  display: inline-flex; align-items:center; justify-content:center;
-  width: 72px; height: 72px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,154,20,0.1) 0%, rgba(200,154,20,0.03) 60%, transparent 100%);
-  margin-bottom: 22px;
-  box-shadow: 0 0 0 1px rgba(200,154,20,0.08);
-  animation: haloBreath 2.4s ease-in-out infinite;
-}
-@keyframes haloBreath {
-  0%,100% { box-shadow: 0 0 0 1px rgba(200,154,20,0.08), 0 0 20px rgba(200,154,20,0.04); }
-  50%      { box-shadow: 0 0 0 1px rgba(200,154,20,0.18), 0 0 36px rgba(200,154,20,0.1); }
-}
-.quill-icon { font-size: 32px; animation: quillSwing 1.5s ease-in-out infinite; display:inline-block; }
-@keyframes quillSwing {
-  0%,100% { transform: rotate(-9deg) translate(-2px,1px); }
-  50%     { transform: rotate(7deg)  translate(2px,-1px); }
-}
-.loading-text { font-family:'IM Fell English',serif; font-style:italic; color:var(--ink-ghost); font-size:17px; letter-spacing:.06em; transition:opacity .25s; }
-
-/* ─── Surprise reveal ─── */
-.surprise-reveal { display:none; text-align:center; padding: 80px 24px 72px; }
-.surprise-reveal.show { display:block; animation: fadeIn .4s ease both; }
-.reveal-eyebrow { font-family:'IM Fell English SC',serif; font-size:16px; letter-spacing:.38em; color:var(--ink-ghost); margin-bottom:24px; }
-.reveal-author {
-  font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
-  font-size: clamp(34px,8vw,50px); color:var(--ink); line-height:1;
-  animation: revealPop .6s .1s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-@keyframes revealPop { from{opacity:0;transform:scale(0.5) translateY(10px);} to{opacity:1;transform:scale(1) translateY(0);} }
-.reveal-ornament { font-size:22px; color:var(--gold-hi); display:block; margin:18px 0 22px; opacity:.8; animation:revealPop .5s .28s cubic-bezier(0.34,1.56,0.64,1) both; }
-.reveal-continue {
-  padding: 13px 44px;
-  background: linear-gradient(165deg,#2c1e0e,#1a1208);
-  color: var(--paper-mid); border: 1px solid rgba(200,154,20,0.25);
-  border-radius: 2px; font-family:'IM Fell English SC',serif; font-size:15px;
-  letter-spacing:.18em; cursor:pointer; transition:all .18s;
-  animation: fadeIn .4s .58s ease both; animation-fill-mode:both; opacity:0;
-}
-.reveal-continue:hover { background:linear-gradient(165deg,#3c2c18,#2a1e10); border-color:rgba(200,154,20,.45); color:var(--paper); }
-
-/* ─── Memoir output ─── */
-.memoir-output { display:none; animation: fadeIn .7s ease both; }
-
-.memoir-header { text-align:center; margin-bottom:36px; }
-
-/* Decorative newspaper-style rule */
-.header-rule-top {
-  display: flex; align-items: center; margin-bottom: 28px;
-}
-.hrt-thick { flex:1; height:2px; background:var(--ink); }
-.hrt-thin  { flex:2; height:1px; background:var(--paper-deep); margin: 0 3px; }
-.hrt-dot   { width:5px;height:5px;border-radius:50%;background:var(--ink);margin:0 6px;flex-shrink:0; }
-
-.memoir-title {
-  font-family: 'Playfair Display', serif;
-  font-style: italic; font-weight: 700;
-  font-size: clamp(26px,4vw,34px);
-  color: var(--ink);
-  line-height: 1.2;
-  margin-bottom: 12px;
-}
-.memoir-byline {
-  font-family: 'IM Fell English SC', serif;
-  font-size: 14px; letter-spacing:.3em;
-  color: var(--ink-ghost); margin-bottom:6px;
-}
-.memoir-meta {
-  font-family: 'IM Fell English', serif;
-  font-style: italic; font-size:15px; color:var(--ink-light);
-}
-
-.header-rule-bottom {
-  display:flex; align-items:center; margin-top:24px; gap:0;
-}
-.hrb-line { flex:1; height:1px; background:var(--paper-dark); }
-.hrb-ornament { padding: 0 16px; color:var(--gold); font-size:17px; line-height:1; }
-
-/* Body copy */
-.memoir-text {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 19px; line-height: 2.05;
-  color: var(--ink);
-  text-align: justify; hyphens: auto;
-}
-.memoir-text p + p { text-indent:2em; margin-top:.2em; }
-.memoir-text p:first-child::first-letter {
-  font-family:'Playfair Display',serif; font-weight:700;
-  float:left; font-size:5.6em; line-height:.68;
-  margin-right:8px; margin-top:12px;
-  color:var(--crimson);
-  text-shadow:1px 2px 0 rgba(100,20,20,0.12);
-}
-
-/* Footer */
-.memoir-footer {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-top:44px; padding-top:16px;
-  border-top:1px solid var(--paper-dark);
-  font-family:'IM Fell English',serif; font-style:italic;
-  font-size:16px; color:var(--ink-ghost);
-}
-.page-num { font-style:normal; font-family:'IM Fell English SC',serif; font-size:15px; letter-spacing:.12em; }
-
-/* Source notes */
-.source-notes {
-  margin-top:26px; padding:14px 18px;
-  background:linear-gradient(to right, rgba(0,0,0,0.03), transparent);
-  border-left:2px solid var(--paper-deep);
-  border-radius:0 2px 2px 0;
-}
-.source-notes-label { font-family:'IM Fell English SC',serif; font-size:16px; letter-spacing:.24em; color:var(--ink-ghost); margin-bottom:6px; }
-.source-notes-text  { font-size:15px; color:var(--ink-light); font-style:italic; line-height:1.65; opacity:.8; }
-
-/* ─── Action buttons ─── */
-.action-row { display:flex; gap:10px; margin-top:34px; padding-top:28px; border-top:1px solid var(--paper-dark); }
-.action-btn {
-  flex:1; padding:11px 14px;
-  background:rgba(255,255,255,0.38); border:1px solid var(--paper-dark); border-radius:2px;
-  font-family:'IM Fell English',serif; font-size:15px; color:var(--ink-mid);
-  cursor:pointer; transition:all .18s;
-  display:flex; align-items:center; justify-content:center; gap:7px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.75);
-}
-.action-btn:hover { background:rgba(255,255,255,0.78); border-color:var(--ink-light); color:var(--ink); transform:translateY(-1px); box-shadow:0 3px 9px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,.9); }
-.action-btn.success { border-color:#5a8a5a!important; color:#4a7a4a!important; background:rgba(90,138,90,0.07)!important; }
-.action-btn.saved   { border-color:var(--gold)!important; color:var(--gold)!important; background:rgba(154,112,16,0.07)!important; }
-
-.bottom-actions { display:flex; gap:10px; margin-top:10px; }
-.secondary-btn {
-  flex:1; padding:11px;
-  background:transparent; border:1px dashed var(--paper-deep); border-radius:2px;
-  font-family:'IM Fell English',serif; font-style:italic; font-size:15px;
-  color:var(--ink-ghost); cursor:pointer; transition:all .18s; text-align:center;
-}
-.secondary-btn:hover { border-style:solid; border-color:var(--ink-light); color:var(--ink-mid); background:rgba(255,255,255,.2); }
-
-/* ─── Error ─── */
-.error-msg {
-  background:rgba(122,31,31,0.06); border:1px solid rgba(122,31,31,0.22);
-  border-left:3px solid var(--crimson); padding:13px 16px;
-  font-size:16px; color:var(--crimson); margin-top:14px;
-  display:none; font-style:italic; border-radius:0 1px 1px 0;
-}
-
-/* ─── Collection ─── */
-.collection-section {
-  width:100%; max-width:750px; margin-top:56px;
-  animation: fadeUp .9s .25s cubic-bezier(0.16,1,0.3,1) both;
-}
-.collection-header {
-  font-family:'IM Fell English SC',serif; font-size:15px; letter-spacing:.24em;
-  color:rgba(200,175,140,0.45); margin-bottom:18px;
-  display:flex; align-items:center; gap:14px;
-}
-.collection-header::before,.collection-header::after {
-  content:''; flex:1; height:1px;
-  background:linear-gradient(to right, transparent, rgba(200,175,140,0.14));
-}
-.collection-header::after { background:linear-gradient(to left, transparent, rgba(200,175,140,0.14)); }
-
-.collection-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
-
-.collection-item {
-  background:linear-gradient(150deg, rgba(248,241,227,0.06) 0%, rgba(248,241,227,0.03) 100%);
-  border:1px solid rgba(248,241,227,0.09);
-  border-radius:3px; padding:20px 18px; cursor:pointer;
-  transition:all .2s; position:relative; overflow:hidden;
-}
-/* Red top accent */
-.collection-item::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(to right, var(--crimson), transparent 70%);
-  opacity:0; transition:opacity .2s;
-}
-.collection-item:hover {
-  background:linear-gradient(150deg, rgba(248,241,227,0.1) 0%, rgba(248,241,227,0.06) 100%);
-  border-color:rgba(248,241,227,0.18);
-  transform:translateY(-3px);
-  box-shadow:0 8px 24px rgba(0,0,0,0.22);
-}
-.collection-item:hover::before { opacity:.7; }
-.ci-style { font-family:'IM Fell English SC',serif; font-size:16px; letter-spacing:.2em; color:var(--gold-hi); margin-bottom:6px; opacity:.8; }
-.ci-title  { font-family:'Playfair Display',serif; font-style:italic; font-size:16px; color:rgba(248,241,227,0.88); margin-bottom:8px; line-height:1.3; }
-.ci-raw    { font-size:16px; color:rgba(248,241,227,0.32); line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-style:italic; margin-bottom:10px; }
-.ci-date   { font-family:'IM Fell English SC',serif; font-size:16px; letter-spacing:.1em; color:rgba(248,241,227,0.2); }
-.ci-delete {
-  position:absolute; top:10px; right:10px;
-  background:none; border:none; color:rgba(248,241,227,0.12);
-  cursor:pointer; font-size:15px; line-height:1; padding:3px 5px;
-  transition:all .15s; border-radius:2px;
-}
-.ci-delete:hover { color:#cc5555; background:rgba(180,50,50,0.12); }
-
-.empty-collection {
-  font-family:'IM Fell English',serif; font-style:italic; font-size:16px;
-  color:rgba(248,241,227,0.18); text-align:center; padding:48px 32px;
-  border:1px dashed rgba(248,241,227,0.07); border-radius:3px; line-height:1.8;
-}
-
-/* ─── Toast ─── */
-.toast {
-  position:fixed; bottom:36px; left:50%;
-  transform:translateX(-50%) translateY(100px);
-  background:linear-gradient(135deg,#2e2010,#1a1208);
-  color:var(--paper-mid); padding:13px 30px; border-radius:2px;
-  border:1px solid rgba(200,154,20,0.22);
-  font-family:'IM Fell English',serif; font-style:italic; font-size:16px;
-  transition:transform .36s cubic-bezier(0.16,1,0.3,1);
-  z-index:100; white-space:nowrap;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-}
-.toast.show { transform:translateX(-50%) translateY(0); }
-
-/* ─── Animations ─── */
-@keyframes fadeDown { from{opacity:0;transform:translateY(-22px);} to{opacity:1;transform:translateY(0);} }
-@keyframes riseUp   { from{opacity:0;transform:translateY(28px) scale(.99);} to{opacity:1;transform:translateY(0) scale(1);} }
-@keyframes fadeUp   { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
-@keyframes fadeIn   { from{opacity:0;} to{opacity:1;} }
-
-/* ─── Install banner ─── */
-.install-banner {
-  display: none;
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to right, #1e1408, #2a1e10);
-  border-top: 1px solid rgba(200,154,20,0.25);
-  padding: 16px 20px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  align-items: center;
-  gap: 14px;
-  z-index: 200;
-  box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
-  animation: slideUp .4s cubic-bezier(0.16,1,0.3,1) both;
-}
-@keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
-.install-icon { font-size: 28px; flex-shrink: 0; }
-.install-text { flex: 1; }
-.install-text strong {
-  display: block;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 15px;
-  color: var(--paper);
-  margin-bottom: 2px;
-}
-.install-text span {
-  font-family: 'IM Fell English', serif;
-  font-style: italic;
-  font-size: 12px;
-  color: var(--ink-ghost);
-}
-.install-btn {
-  padding: 10px 20px;
-  background: linear-gradient(165deg,#3c2c18,#2a1e10);
-  border: 1px solid rgba(200,154,20,0.35);
-  border-radius: 2px;
-  font-family: 'IM Fell English SC', serif;
-  font-size: 12px;
-  letter-spacing: .15em;
-  color: var(--paper-mid);
-  cursor: pointer;
-  transition: all .18s;
-  white-space: nowrap;
-}
-.install-btn:hover { border-color: rgba(200,154,20,.6); color: var(--paper); }
-.install-dismiss {
-  background: none; border: none;
-  color: var(--ink-ghost); font-size: 20px;
-  cursor: pointer; padding: 4px; line-height: 1;
-  opacity: .6; transition: opacity .15s; flex-shrink: 0;
-}
-.install-dismiss:hover { opacity: 1; }
-
-/* ─── Mobile safe areas ─── */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
-}
-
-/* Larger tap targets on mobile */
-@media (max-width: 580px) {
-  .action-btn, .secondary-btn, .style-btn { min-height: 48px; }
-  .generate-btn { min-height: 56px; }
-  .card-inner { padding: 36px 24px 40px 44px; }
-  .card-margin { left: 36px; }
-  .style-grid { grid-template-columns: repeat(2,1fr); }
-  .action-row { flex-wrap: wrap; }
-  .bottom-actions { flex-direction: column; }
-  .card-leaf { display: none; }
+@supports (padding-bottom:env(safe-area-inset-bottom)){body{padding-bottom:calc(110px + env(safe-area-inset-bottom));}}
+@media (max-width:580px){
+  .action-btn,.secondary-btn,.style-btn{min-height:48px;}
+  .generate-btn{min-height:56px;}
+  .card-inner{padding:36px 24px 40px 44px;}
+  .card-margin{left:36px;}
+  .style-grid{grid-template-columns:repeat(2,1fr);}
+  .action-row{flex-wrap:wrap;}
+  .bottom-actions{flex-direction:column;}
+  .card-leaf{display:none;}
 }
 </style>
 </head>
 <body>
 
-<!-- ── Masthead ── -->
 <header class="masthead">
   <div class="masthead-issue">A Personal Archive · Est. Today</div>
   <h1>Micro-Memoir</h1>
   <div class="masthead-rule">
-    <div class="rule-side"></div>
-    <div class="rule-center"></div>
-    <div class="rule-side r"></div>
+    <div class="rule-side"></div><div class="rule-center"></div><div class="rule-side r"></div>
   </div>
   <p class="tagline">The ordinary, made luminous — one day at a time.</p>
+  <div class="masthead-stats">
+    <div class="stat-item">
+      <div class="stat-num" id="statEntries">0</div>
+      <div class="stat-label">Entries</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-item">
+      <div class="stat-num"><span class="streak-flame streak-dead" id="streakFlame">🔥</span> <span id="statStreak">0</span></div>
+      <div class="stat-label">Day Streak</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-item">
+      <div class="stat-num" id="statDays">0</div>
+      <div class="stat-label">Days Writing</div>
+    </div>
+  </div>
 </header>
 
-<!-- ── Card ── -->
 <main class="card">
   <div class="card-leaf"></div>
   <div class="card-leaf"></div>
@@ -688,21 +237,14 @@ textarea:focus {
     <div class="card-margin"></div>
     <div class="card-inner">
 
-      <!-- INPUT -->
       <div id="inputPhase">
         <div class="section-label">Your Day</div>
         <div class="textarea-wrap">
-          <textarea id="dayInput"
-            placeholder="Describe your day — as rough or rambling as you like. Woke up late, bad coffee, argued about something small, ate cereal for dinner. Whatever happened."
-            rows="6"
-            oninput="onTextInput()"
-            onkeydown="onKeyDown(event)"
-          ></textarea>
+          <textarea id="dayInput" placeholder="Describe your day — as rough or rambling as you like. Woke up late, bad coffee, argued about something small, ate cereal for dinner. Whatever happened." rows="6" oninput="onTextInput()" onkeydown="onKeyDown(event)"></textarea>
           <span class="word-count" id="wordCount">—</span>
         </div>
         <div class="hint-text" id="hintText">Press ⌘↵ to illuminate when ready</div>
         <div class="error-msg" id="errorMsg"></div>
-
         <div class="divider"></div>
         <div class="section-label">Voice &amp; Style</div>
         <div class="style-grid">
@@ -715,19 +257,15 @@ textarea:focus {
         </div>
         <div class="divider"></div>
         <button class="generate-btn" id="generateBtn" disabled onclick="generate()">
-          <span class="btn-spark">✦</span>
-          Illuminate This Day
-          <span class="shortcut-hint">(⌘↵)</span>
+          <span class="btn-spark">✦</span> Illuminate This Day <span class="shortcut-hint">(⌘↵)</span>
         </button>
       </div>
 
-      <!-- LOADING -->
       <div class="loading-state" id="loadingState">
         <div class="quill-halo"><div class="quill-icon">✒️</div></div>
         <div class="loading-text" id="loadingText">Sharpening the quill…</div>
       </div>
 
-      <!-- SURPRISE REVEAL -->
       <div class="surprise-reveal" id="surpriseReveal">
         <div class="reveal-eyebrow">Tonight's Voice</div>
         <div class="reveal-author" id="revealAuthor"></div>
@@ -735,40 +273,31 @@ textarea:focus {
         <button class="reveal-continue" onclick="continueAfterReveal()">Begin Writing →</button>
       </div>
 
-      <!-- OUTPUT -->
       <div class="memoir-output" id="memoirOutput">
         <div class="memoir-header">
           <div class="header-rule-top">
-            <div class="hrt-thick"></div>
-            <div class="hrt-thin"></div>
-            <div class="hrt-dot"></div>
-            <div class="hrt-thin"></div>
-            <div class="hrt-thick"></div>
+            <div class="hrt-thick"></div><div class="hrt-thin"></div><div class="hrt-dot"></div><div class="hrt-thin"></div><div class="hrt-thick"></div>
           </div>
-          <div class="memoir-title" id="memoirTitle"></div>
+          <div class="title-edit-hint">Click to edit title</div>
+          <input type="text" class="memoir-title" id="memoirTitle" placeholder="Untitled">
           <div class="memoir-byline">In the manner of</div>
           <div class="memoir-meta"><span id="outputStyle"></span>&ensp;·&ensp;<span id="outputDate"></span></div>
           <div class="header-rule-bottom">
-            <div class="hrb-line"></div>
-            <div class="hrb-ornament">❧</div>
-            <div class="hrb-line"></div>
+            <div class="hrb-line"></div><div class="hrb-ornament">❧</div><div class="hrb-line"></div>
           </div>
         </div>
-
         <div class="memoir-text" id="memoirText"></div>
-
         <div class="source-notes">
           <div class="source-notes-label">Original Notes</div>
           <div class="source-notes-text" id="sourceNotesText"></div>
         </div>
-
         <div class="memoir-footer">
           <span id="footerStyle"></span>
           <span class="page-num">I.</span>
         </div>
-
         <div class="action-row">
           <button class="action-btn" id="copyBtn" onclick="copyMemoir()">📋 Copy</button>
+          <button class="action-btn" id="readBtn" onclick="toggleRead()">🔊 Read</button>
           <button class="action-btn" id="saveBtn" onclick="saveToCollection()">🔖 Save</button>
           <button class="action-btn" id="shareBtn" onclick="shareMemoir()">↗ Share</button>
         </div>
@@ -782,15 +311,20 @@ textarea:focus {
   </div>
 </main>
 
-<!-- Collection -->
-<section class="collection-section" id="collectionSection">
-  <div class="collection-header">My Memoir Collection</div>
+<section class="collection-section">
+  <div class="collection-header">
+    <div class="collection-header-text">My Memoir Collection</div>
+    <button class="search-toggle" id="searchToggle" onclick="toggleSearch()" title="Search entries">🔍</button>
+  </div>
+  <div class="search-wrap" id="searchWrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search by title, notes, style…" oninput="renderCollection()">
+  </div>
   <div class="collection-grid" id="collectionGrid"></div>
 </section>
 
 <div class="toast" id="toast"></div>
 
-<!-- Install banner (shown automatically on Android; iOS shows instructions) -->
 <div class="install-banner" id="installBanner">
   <div class="install-icon">📖</div>
   <div class="install-text">
@@ -802,278 +336,251 @@ textarea:focus {
 </div>
 
 <script>
-  let selectedStyle=null,currentMemoir=null,apiResult=null;
-  let apiDone=false,revealDone=false,loadingInterval=null;
+let selectedStyle=null,currentMemoir=null,apiResult=null;
+let apiDone=false,revealDone=false,loadingInterval=null;
+let isReading=false;
 
-  const loadingLines=[
-    "Sharpening the quill…",
-    "Finding the light in the ordinary…",
-    "Letting memory breathe…",
-    "Pressing ink to page…",
-    "Listening for the sentence that opens everything…",
-    "Choosing the right word for silence…",
-  ];
+const loadingLines=["Sharpening the quill…","Finding the light in the ordinary…","Letting memory breathe…","Pressing ink to page…","Listening for the sentence that opens everything…","Choosing the right word for silence…"];
 
-  document.querySelectorAll('.style-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedStyle=btn.dataset.style;
-      updateBtn();
-    });
+document.querySelectorAll('.style-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); selectedStyle=btn.dataset.style; updateBtn();
   });
+});
 
-  function onTextInput(){
-    const val=document.getElementById('dayInput').value.trim();
-    const words=val?val.split(/\s+/).length:0;
-    const wc=document.getElementById('wordCount');
-    wc.textContent=words>0?words+(words===1?' word':' words'):'—';
-    wc.classList.toggle('ready',words>=8);
-    document.getElementById('hintText').classList.toggle('visible',words>=5);
-    updateBtn();
-  }
+function onTextInput(){
+  const val=document.getElementById('dayInput').value.trim();
+  const words=val?val.split(/\s+/).length:0;
+  const wc=document.getElementById('wordCount');
+  wc.textContent=words>0?words+(words===1?' word':' words'):'—';
+  wc.classList.toggle('ready',words>=8);
+  document.getElementById('hintText').classList.toggle('visible',words>=5);
+  updateBtn();
+}
+function onKeyDown(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){e.preventDefault();if(!document.getElementById('generateBtn').disabled)generate();}
+}
+function updateBtn(){
+  document.getElementById('generateBtn').disabled=!(document.getElementById('dayInput').value.trim().length>10&&selectedStyle);
+}
 
-  function onKeyDown(e){
-    if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){
-      e.preventDefault();
-      if(!document.getElementById('generateBtn').disabled) generate();
-    }
-  }
+async function generate(){
+  const raw=document.getElementById('dayInput').value.trim();
+  if(!raw||!selectedStyle)return;
+  document.getElementById('errorMsg').style.display='none';
+  const authors=['Joan Didion','James Baldwin','David Sedaris','Toni Morrison','Haruki Murakami'];
+  const resolved=selectedStyle==='Surprise me'?authors[Math.floor(Math.random()*authors.length)]:selectedStyle;
+  apiResult=null;apiDone=false;revealDone=false;
+  if(selectedStyle==='Surprise me'){showPhase('surpriseReveal');document.getElementById('revealAuthor').textContent=resolved;}
+  else showPhase('loadingState');
+  startAPICall(raw,resolved);
+}
 
-  function updateBtn(){
-    document.getElementById('generateBtn').disabled=
-      !(document.getElementById('dayInput').value.trim().length>10&&selectedStyle);
-  }
-
-  async function generate(){
-    const raw=document.getElementById('dayInput').value.trim();
-    if(!raw||!selectedStyle) return;
-    document.getElementById('errorMsg').style.display='none';
-    const authors=['Joan Didion','James Baldwin','David Sedaris','Toni Morrison','Haruki Murakami'];
-    const resolved=selectedStyle==='Surprise me'
-      ?authors[Math.floor(Math.random()*authors.length)]
-      :selectedStyle;
-    apiResult=null; apiDone=false; revealDone=false;
-    if(selectedStyle==='Surprise me'){
-      showPhase('surpriseReveal');
-      document.getElementById('revealAuthor').textContent=resolved;
-    } else {
-      showPhase('loadingState');
-    }
-    startAPICall(raw,resolved);
-  }
-
-  async function startAPICall(raw,resolved){
-    if(loadingInterval) clearInterval(loadingInterval);
-    loadingInterval=animateLoadingText();
-    try{
-      const res=await fetch("/api/generate",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          model:"claude-sonnet-4-20250514",
-          max_tokens:1200,
-          system:"You are a literary ghost-writer. Write memoir excerpts in the distinct voice and style of specific authors. Literary, genuine, first-person. Never use clichés. Capture the author's exact rhythm, vocabulary, preoccupations, and emotional register.",
-          messages:[{role:"user",content:
-`Rewrite the following as a ~300-word literary memoir excerpt in the voice and style of ${resolved}. Make the ordinary feel meaningful. First-person. No clichés. Capture that author's specific cadence and emotional register precisely.
-
-Also write a brief, evocative title (4–7 words, in the spirit of the author).
-
-Respond in exactly this format:
-TITLE: [title here]
-TEXT: [memoir excerpt here]
-
-The person's day:
-${raw}`}]
-        })
-      });
-      if(loadingInterval){clearInterval(loadingInterval);loadingInterval=null;}
-      if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`API error ${res.status}`);}
-      const data=await res.json();
-      const content=data.content.map(b=>b.text||'').join('');
-      const titleMatch=content.match(/TITLE:\s*(.+?)(?:\n|$)/);
-      const textMatch=content.match(/TEXT:\s*([\s\S]+)/);
-      const title=titleMatch?titleMatch[1].trim().replace(/^["']|["']$/g,''):'Untitled';
-      const text=textMatch?textMatch[1].trim():content;
-      apiResult={text,title,style:resolved,raw,date:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})};
-      apiDone=true;
-      const reveal=document.getElementById('surpriseReveal');
-      if(!reveal.classList.contains('active-phase')||revealDone) finishAndShow();
-    }catch(err){
-      if(loadingInterval){clearInterval(loadingInterval);loadingInterval=null;}
-      showPhase('inputPhase');
-      const el=document.getElementById('errorMsg');
-      el.textContent='✦ '+(err.message||'Something went wrong. Please try again.');
-      el.style.display='block';
-    }
-  }
-
-  function continueAfterReveal(){
-    revealDone=true;
-    if(apiDone&&apiResult) finishAndShow();
-    else showPhase('loadingState');
-  }
-
-  function finishAndShow(){
-    currentMemoir=apiResult;
-    showPhase('memoirOutput');
-    const m=currentMemoir;
-    document.getElementById('memoirTitle').textContent=m.title;
-    document.getElementById('outputStyle').textContent=m.style;
-    document.getElementById('outputDate').textContent=m.date;
-    document.getElementById('footerStyle').textContent=m.style;
-    document.getElementById('sourceNotesText').textContent=m.raw;
-    document.getElementById('memoirText').innerHTML=
-      m.text.split(/\n\n+/).filter(p=>p.trim()).map(p=>`<p>${p.trim()}</p>`).join('');
-    document.getElementById('saveBtn').classList.remove('saved');
-    document.getElementById('copyBtn').classList.remove('success');
-  }
-
-  function showPhase(id){
-    ['inputPhase','loadingState','surpriseReveal','memoirOutput'].forEach(p=>{
-      const el=document.getElementById(p);
-      el.style.display='none'; el.classList.remove('active-phase');
-    });
-    const el=document.getElementById(id);
-    el.style.display='block'; el.classList.add('active-phase');
-    if(id==='surpriseReveal') el.classList.add('show');
-    else document.getElementById('surpriseReveal').classList.remove('show');
-  }
-
-  function animateLoadingText(){
-    let i=0;
-    const el=document.getElementById('loadingText');
-    el.textContent=loadingLines[0]; el.style.opacity=1;
-    return setInterval(()=>{
-      i=(i+1)%loadingLines.length;
-      el.style.opacity=0;
-      setTimeout(()=>{el.textContent=loadingLines[i];el.style.opacity=1;},240);
-    },1900);
-  }
-
-  function resetToInput(){
+async function startAPICall(raw,resolved){
+  if(loadingInterval)clearInterval(loadingInterval);
+  loadingInterval=animateLoadingText();
+  try{
+    const res=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1200,system:"You are a literary ghost-writer. Write memoir excerpts in the distinct voice and style of specific authors. Literary, genuine, first-person. Never use clichés. Capture the author's exact rhythm, vocabulary, preoccupations, and emotional register.",messages:[{role:"user",content:`Rewrite the following as a ~300-word literary memoir excerpt in the voice and style of ${resolved}. Make the ordinary feel meaningful. First-person. No clichés. Capture that author's specific cadence and emotional register precisely.\n\nAlso write a brief, evocative title (4–7 words, in the spirit of the author).\n\nRespond in exactly this format:\nTITLE: [title here]\nTEXT: [memoir excerpt here]\n\nThe person's day:\n${raw}`}]})});
+    if(loadingInterval){clearInterval(loadingInterval);loadingInterval=null;}
+    if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`API error ${res.status}`);}
+    const data=await res.json();
+    const content=data.content.map(b=>b.text||'').join('');
+    const titleMatch=content.match(/TITLE:\s*(.+?)(?:\n|$)/);
+    const textMatch=content.match(/TEXT:\s*([\s\S]+)/);
+    const title=titleMatch?titleMatch[1].trim().replace(/^["']|["']$/g,''):'Untitled';
+    const text=textMatch?textMatch[1].trim():content;
+    apiResult={text,title,style:resolved,raw,date:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})};
+    apiDone=true;
+    const reveal=document.getElementById('surpriseReveal');
+    if(!reveal.classList.contains('active-phase')||revealDone)finishAndShow();
+  }catch(err){
+    if(loadingInterval){clearInterval(loadingInterval);loadingInterval=null;}
     showPhase('inputPhase');
-    document.getElementById('dayInput').value='';
-    document.getElementById('hintText').classList.remove('visible');
-    document.getElementById('wordCount').textContent='—';
-    document.getElementById('wordCount').classList.remove('ready');
-    currentMemoir=null; updateBtn();
+    const el=document.getElementById('errorMsg');
+    el.textContent='✦ '+(err.message||'Something went wrong. Please try again.');
+    el.style.display='block';
   }
+}
 
-  function regenerate(){
-    if(!currentMemoir) return;
-    document.getElementById('dayInput').value=currentMemoir.raw;
-    document.querySelectorAll('.style-btn').forEach(b=>b.classList.toggle('active',b.dataset.style===currentMemoir.style));
-    selectedStyle=currentMemoir.style;
-    apiResult=null; apiDone=false; revealDone=false;
-    showPhase('loadingState');
-    startAPICall(currentMemoir.raw,currentMemoir.style);
-  }
+function continueAfterReveal(){revealDone=true;if(apiDone&&apiResult)finishAndShow();else showPhase('loadingState');}
 
-  function copyMemoir(){
-    if(!currentMemoir) return;
-    navigator.clipboard.writeText(`${currentMemoir.title}\n\n${currentMemoir.text}\n\n— In the manner of ${currentMemoir.style}, ${currentMemoir.date}`).then(()=>{
-      const btn=document.getElementById('copyBtn');
-      btn.classList.add('success'); btn.textContent='✓ Copied';
-      setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='📋 Copy';},2200);
-    });
-  }
+function finishAndShow(){
+  currentMemoir=apiResult;
+  showPhase('memoirOutput');
+  const m=currentMemoir;
+  document.getElementById('memoirTitle').value=m.title;
+  document.getElementById('outputStyle').textContent=m.style;
+  document.getElementById('outputDate').textContent=m.date;
+  document.getElementById('footerStyle').textContent=m.style;
+  document.getElementById('sourceNotesText').textContent=m.raw;
+  document.getElementById('memoirText').innerHTML=m.text.split(/\n\n+/).filter(p=>p.trim()).map(p=>`<p>${p.trim()}</p>`).join('');
+  document.getElementById('saveBtn').classList.remove('saved');
+  document.getElementById('copyBtn').classList.remove('success');
+  stopReading();
+}
 
-  function saveToCollection(){
-    if(!currentMemoir) return;
-    const col=getCollection();
-    col.unshift({id:Date.now(),...currentMemoir});
-    localStorage.setItem('microMemoir_collection',JSON.stringify(col));
-    document.getElementById('saveBtn').classList.add('saved');
-    document.getElementById('saveBtn').textContent='✓ Saved';
-    renderCollection();
-    showToast('Entry saved to your collection ✦');
-  }
+// Editable title syncs back
+document.getElementById('memoirTitle').addEventListener('input',function(){if(currentMemoir)currentMemoir.title=this.value;});
 
-  async function shareMemoir(){
-    if(!currentMemoir) return;
-    if(navigator.share){
-      try{await navigator.share({title:`Micro-Memoir: ${currentMemoir.title}`,text:`${currentMemoir.title}\n\n${currentMemoir.text}\n\n— In the manner of ${currentMemoir.style}`});return;}catch{}
-    }
-    copyMemoir();
-    showToast('Copied to clipboard for sharing ✦');
-  }
+function showPhase(id){
+  ['inputPhase','loadingState','surpriseReveal','memoirOutput'].forEach(p=>{const el=document.getElementById(p);el.style.display='none';el.classList.remove('active-phase');});
+  const el=document.getElementById(id);el.style.display='block';el.classList.add('active-phase');
+  if(id==='surpriseReveal')el.classList.add('show');else document.getElementById('surpriseReveal').classList.remove('show');
+}
 
-  function getCollection(){
-    try{return JSON.parse(localStorage.getItem('microMemoir_collection')||'[]');}
-    catch{return [];}
-  }
+function animateLoadingText(){
+  let i=0;const el=document.getElementById('loadingText');el.textContent=loadingLines[0];el.style.opacity=1;
+  return setInterval(()=>{i=(i+1)%loadingLines.length;el.style.opacity=0;setTimeout(()=>{el.textContent=loadingLines[i];el.style.opacity=1;},240);},1900);
+}
 
-  function renderCollection(){
-    const col=getCollection();
-    const grid=document.getElementById('collectionGrid');
-    if(!col.length){
-      grid.innerHTML='<div class="empty-collection">Your collection awaits.<br>Save your first memoir above.</div>';
-      return;
-    }
-    grid.innerHTML=col.map(e=>`
-      <div class="collection-item" onclick="loadEntry(${e.id})">
-        <button class="ci-delete" onclick="deleteEntry(event,${e.id})" title="Delete">×</button>
-        <div class="ci-style">${(e.style||'').toUpperCase()}</div>
-        <div class="ci-title">${e.title||'Untitled'}</div>
-        <div class="ci-raw">${e.raw||''}</div>
-        <div class="ci-date">${e.date||''}</div>
-      </div>`).join('');
-  }
+function resetToInput(){
+  stopReading();showPhase('inputPhase');
+  document.getElementById('dayInput').value='';
+  document.getElementById('hintText').classList.remove('visible');
+  document.getElementById('wordCount').textContent='—';
+  document.getElementById('wordCount').classList.remove('ready');
+  currentMemoir=null;updateBtn();
+}
 
-  function loadEntry(id){
-    const e=getCollection().find(x=>x.id===id);
-    if(!e) return;
-    currentMemoir=e;
-    document.getElementById('dayInput').value=e.raw||'';
-    document.querySelectorAll('.style-btn').forEach(b=>b.classList.toggle('active',b.dataset.style===e.style));
-    selectedStyle=e.style; apiResult=e; apiDone=true;
-    finishAndShow();
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+function regenerate(){
+  if(!currentMemoir)return;
+  stopReading();
+  document.getElementById('dayInput').value=currentMemoir.raw;
+  document.querySelectorAll('.style-btn').forEach(b=>b.classList.toggle('active',b.dataset.style===currentMemoir.style));
+  selectedStyle=currentMemoir.style;apiResult=null;apiDone=false;revealDone=false;
+  showPhase('loadingState');startAPICall(currentMemoir.raw,currentMemoir.style);
+}
 
-  function deleteEntry(evt,id){
-    evt.stopPropagation();
-    localStorage.setItem('microMemoir_collection',JSON.stringify(getCollection().filter(e=>e.id!==id)));
-    renderCollection();
-  }
+// ── Read Aloud ──
+function toggleRead(){
+  if(isReading){stopReading();return;}
+  if(!currentMemoir||!window.speechSynthesis)return;
+  const rawText=document.getElementById('memoirText').innerText;
+  const utt=new SpeechSynthesisUtterance((currentMemoir.title||'')+'. '+rawText);
+  utt.rate=0.88;utt.pitch=1.0;
+  const voices=speechSynthesis.getVoices();
+  const pick=voices.find(v=>v.name.includes('Samantha')||v.name.includes('Karen')||v.name.includes('Daniel')||v.lang==='en-GB');
+  if(pick)utt.voice=pick;
+  utt.onend=stopReading;utt.onerror=stopReading;
+  speechSynthesis.speak(utt);
+  isReading=true;
+  const btn=document.getElementById('readBtn');
+  btn.classList.add('reading');btn.innerHTML='⏹ Stop';
+}
+function stopReading(){
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  isReading=false;
+  const btn=document.getElementById('readBtn');
+  if(btn){btn.classList.remove('reading');btn.innerHTML='🔊 Read';}
+}
 
-  function showToast(msg){
-    const t=document.getElementById('toast');
-    t.textContent=msg; t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),2800);
-  }
-
-  renderCollection();
-
-  // ── Service Worker ──
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
-
-  // ── Install banner ──
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installBanner').style.display = 'flex';
+// ── Copy / Save / Share ──
+function copyMemoir(){
+  if(!currentMemoir)return;
+  const title=document.getElementById('memoirTitle').value||currentMemoir.title;
+  navigator.clipboard.writeText(title+'\n\n'+currentMemoir.text+'\n\n— In the manner of '+currentMemoir.style+', '+currentMemoir.date).then(()=>{
+    const btn=document.getElementById('copyBtn');btn.classList.add('success');btn.textContent='✓ Copied';
+    setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='📋 Copy';},2200);
   });
-  window.addEventListener('appinstalled', () => {
-    document.getElementById('installBanner').style.display = 'none';
-    deferredPrompt = null;
-  });
-  document.getElementById('installBtn').addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') document.getElementById('installBanner').style.display = 'none';
-    deferredPrompt = null;
-  });
-  document.getElementById('installDismiss').addEventListener('click', () => {
-    document.getElementById('installBanner').style.display = 'none';
-  });
+}
+
+function saveToCollection(){
+  if(!currentMemoir)return;
+  currentMemoir.title=document.getElementById('memoirTitle').value||currentMemoir.title;
+  const col=getCollection();
+  const idx=col.findIndex(e=>e.id===currentMemoir.id);
+  if(idx>=0)col[idx]=currentMemoir;else col.unshift({id:Date.now(),...currentMemoir});
+  localStorage.setItem('microMemoir_collection',JSON.stringify(col));
+  document.getElementById('saveBtn').classList.add('saved');
+  document.getElementById('saveBtn').textContent='✓ Saved';
+  updateStats();renderCollection();
+  showToast('Entry saved to your collection ✦');
+}
+
+async function shareMemoir(){
+  if(!currentMemoir)return;
+  const title=document.getElementById('memoirTitle').value||currentMemoir.title;
+  if(navigator.share){try{await navigator.share({title:'Micro-Memoir: '+title,text:title+'\n\n'+currentMemoir.text+'\n\n— In the manner of '+currentMemoir.style});return;}catch{}}
+  copyMemoir();showToast('Copied to clipboard for sharing ✦');
+}
+
+// ── Collection ──
+function getCollection(){try{return JSON.parse(localStorage.getItem('microMemoir_collection')||'[]');}catch{return[];}}
+
+function toggleSearch(){
+  const wrap=document.getElementById('searchWrap');
+  const btn=document.getElementById('searchToggle');
+  const on=wrap.classList.toggle('visible');
+  btn.classList.toggle('active',on);
+  if(on)document.getElementById('searchInput').focus();
+  else{document.getElementById('searchInput').value='';renderCollection();}
+}
+
+function renderCollection(){
+  const col=getCollection();
+  const q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
+  const grid=document.getElementById('collectionGrid');
+  if(!col.length){grid.innerHTML='<div class="empty-collection">Your collection awaits.<br>Save your first memoir above.</div>';return;}
+  const filtered=q?col.filter(e=>(e.title||'').toLowerCase().includes(q)||(e.raw||'').toLowerCase().includes(q)||(e.text||'').toLowerCase().includes(q)||(e.style||'').toLowerCase().includes(q)):col;
+  if(!filtered.length){grid.innerHTML=`<div class="no-results">No memoirs match "<em>${q}</em>"</div>`;return;}
+  grid.innerHTML=filtered.map(e=>`
+    <div class="collection-item" onclick="loadEntry(${e.id})">
+      <button class="ci-delete" onclick="deleteEntry(event,${e.id})" title="Delete">×</button>
+      <div class="ci-style">${(e.style||'').toUpperCase()}</div>
+      <div class="ci-title">${e.title||'Untitled'}</div>
+      <div class="ci-raw">${e.raw||''}</div>
+      <div class="ci-date">${e.date||''}</div>
+    </div>`).join('');
+}
+
+function loadEntry(id){
+  const e=getCollection().find(x=>x.id===id);if(!e)return;
+  currentMemoir={...e};
+  document.getElementById('dayInput').value=e.raw||'';
+  document.querySelectorAll('.style-btn').forEach(b=>b.classList.toggle('active',b.dataset.style===e.style));
+  selectedStyle=e.style;apiResult=e;apiDone=true;
+  finishAndShow();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function deleteEntry(evt,id){
+  evt.stopPropagation();
+  localStorage.setItem('microMemoir_collection',JSON.stringify(getCollection().filter(e=>e.id!==id)));
+  updateStats();renderCollection();
+}
+
+// ── Stats & Streak ──
+function updateStats(){
+  const col=getCollection();
+  document.getElementById('statEntries').textContent=col.length;
+  const days=new Set(col.map(e=>e.date));
+  document.getElementById('statDays').textContent=days.size;
+  const today=new Date();today.setHours(0,0,0,0);
+  const dayMs=86400000;
+  const sorted=[...days].map(d=>new Date(d).setHours(0,0,0,0)).sort((a,b)=>b-a);
+  let streak=0,expected=today.getTime();
+  for(const d of sorted){
+    if(d===expected){streak++;expected-=dayMs;}
+    else if(d===expected+dayMs){expected=d-dayMs;}
+    else break;
+  }
+  document.getElementById('statStreak').textContent=streak;
+  const flame=document.getElementById('streakFlame');
+  flame.classList.toggle('streak-alive',streak>0);
+  flame.classList.toggle('streak-dead',streak===0);
+}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+renderCollection();updateStats();
+
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').style.display='flex';});
+window.addEventListener('appinstalled',()=>{document.getElementById('installBanner').style.display='none';deferredPrompt=null;});
+document.getElementById('installBtn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted')document.getElementById('installBanner').style.display='none';deferredPrompt=null;});
+document.getElementById('installDismiss').addEventListener('click',()=>document.getElementById('installBanner').style.display='none');
 </script>
 </body>
 </html>
